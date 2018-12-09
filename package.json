@@ -1,0 +1,36 @@
+{
+  "name": "vgs-app",
+  "version": "1.0.0",
+  "description": "integrate Very Good Security",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicasioca/vgs-app.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "Node",
+    "NodeJS",
+    "Restify",
+    "Server",
+    "Security",
+    "Very",
+    "Good",
+    "Security",
+    "VGS"
+  ],
+  "author": "Nick Anderson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicasioca/vgs-app/issues"
+  },
+  "homepage": "https://github.com/nicasioca/vgs-app#readme",
+  "dependencies": {
+    "restify": "^7.3.0",
+    "restify-plugins": "^1.6.0"
+  }
+}
