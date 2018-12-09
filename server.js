@@ -2,10 +2,8 @@ var request = require('request');
 var restify = require('restify');
 var restifyPlugins = require('restify-plugins');
 
-function respond(req, res, next) {
-  res.send('hello ' + req.params.name);
-  next();
-}
+var config = require('./config')
+
 
 var server = restify.createServer();
 server.use(restifyPlugins.jsonBodyParser({ mapParams: true }));
@@ -21,6 +19,7 @@ server.post('/data', (req, res, next) => {
 	}
 
 	var data = req.body || {};
+  console.log(data)
 	res.send(data);
 	next();
 });
@@ -34,8 +33,7 @@ server.post('/send', (req, res, next) => {
 
   request({
         method:'post',
-        // url:'https://<YOUR ID HERE>.SANDBOX.verygoodproxy.com/post',
-        url: 'https://echo.apps.verygood.systems/post',
+        url:'https://' + config.vaultId + '.SANDBOX.verygoodproxy.com/post',
         headers: {"content-type": "application/json"},
         json: req.body,
     }, function (error, response, body) {
@@ -46,6 +44,7 @@ server.post('/send', (req, res, next) => {
         }
     });
 });
+
 
 server.listen(8080, function() {
   console.log('%s listening at %s', server.name, server.url);
