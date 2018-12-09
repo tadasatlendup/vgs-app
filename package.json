@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/nicasioca/vgs-app#readme",
   "dependencies": {
+    "request": "^2.88.0",
     "restify": "^7.3.0",
     "restify-plugins": "^1.6.0"
   }

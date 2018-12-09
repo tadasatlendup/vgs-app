@@ -1,3 +1,4 @@
+var request = require('request');
 var restify = require('restify');
 var restifyPlugins = require('restify-plugins');
 
@@ -13,7 +14,7 @@ server.use(restifyPlugins.queryParser({ mapParams: true }));
 server.use(restifyPlugins.fullResponse());
 
 server.post('/data', (req, res, next) => {
-	if (!req.is('application/json')) {
+  if (!req.is('application/json')) {
 		return next(
 			new errors.InvalidContentError("Expects 'application/json'"),
 		);
@@ -24,10 +25,27 @@ server.post('/data', (req, res, next) => {
 	next();
 });
 
-// server.post('/send', (req, res, next) => {
-// 	res.send(200);
-// 	next();
-// });
+server.post('/send', (req, res, next) => {
+  if (!req.is('application/json')) {
+		return next(
+			new errors.InvalidContentError("Expects 'application/json'"),
+		);
+	}
+
+  request({
+        method:'post',
+        // url:'https://<YOUR ID HERE>.SANDBOX.verygoodproxy.com/post',
+        url: 'https://echo.apps.verygood.systems/post',
+        headers: {"content-type": "application/json"},
+        json: req.body,
+    }, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log(body)
+            res.send(body);
+          	next();
+        }
+    });
+});
 
 server.listen(8080, function() {
   console.log('%s listening at %s', server.name, server.url);
